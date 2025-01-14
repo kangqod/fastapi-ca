@@ -29,14 +29,14 @@ class UserRepository(IUserRepository):
 
         return UserVO(**row_to_dict(user))
 
-    def find_all(self):
+    def get_users(self, page: int = 1, items_per_page: int = 10) -> tuple[int, list[UserVO]]:
         with SessionLocal() as db:
-            user = db.query(User).all()
+            query = db.query(User)
+            total_count = query.count()
+            offset = (page - 1) * items_per_page
+            users = query.limit(items_per_page).offset(offset).all()
 
-            if not user:
-                raise HTTPException(status_code=422)
-
-        return user
+        return total_count, [UserVO(**row_to_dict(user)) for user in users]
 
     def find_by_id(self, user_id: str) -> UserVO:
         with SessionLocal() as db:

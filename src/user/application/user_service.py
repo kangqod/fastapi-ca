@@ -40,8 +40,8 @@ class UserService:
         self.user_repo.save(user)
         return user
 
-    def get_users(self):
-        return self.user_repo.find_all()
+    def get_users(self, page: int, items_per_page: int) -> tuple[int, list[User]]:
+        return self.user_repo.get_users(page, items_per_page)
 
     def update_user(self, user_id: str, name: str | None = None, password: str | None = None):
         user = self.user_repo.find_by_id(user_id)

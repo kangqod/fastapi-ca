@@ -38,8 +38,10 @@ def create_user(user: CreateUserBody, user_service: UserService = Depends(Provid
 
 @router.get("", status_code=200)
 @inject
-async def get_users(user_service: UserService = Depends(Provide[Container.user_service])):
-    return user_service.get_users()
+async def get_users(page: int = 1, items_per_page: int = 10, user_service: UserService = Depends(Provide[Container.user_service])):
+    total_count, users = user_service.get_users(page, items_per_page)
+
+    return {"total_count": total_count, "page": page, "users": users}
 
 
 @router.put("", response_model=UserResponse)
