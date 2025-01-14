@@ -48,3 +48,10 @@ async def get_users(page: int = 1, items_per_page: int = 10, user_service: UserS
 @inject
 def update_user(user_id: str, body: UpdateUserBody, user_service: UserService = Depends(Provide["user_service"])):
     return user_service.update_user(user_id=user_id, name=body.name, password=body.password)
+
+
+@router.delete("", status_code=204)
+@inject
+def delete_user(user_id: str, user_service: UserService = Depends(Provide[Container.user_service])):
+    # 다른 유저를 삭제할 수 없도록 토큰에서 유저아이디를 구함
+    return user_service.delete_user(user_id=user_id)

@@ -54,3 +54,7 @@ class UserService:
 
         self.user_repo.update(user)
         return user
+
+    def delete_user(self, user_id: str):
+        self.user_repo.delete(user_id)
+        return {"message": "User deleted"}
