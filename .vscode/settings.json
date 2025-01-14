@@ -1,0 +1,31 @@
+{
+  "files.exclude": {
+    "**/.git": true,
+    "**/.DS_Store": true,
+    "**/node_modules": true
+  },
+  // Pylance 설정
+  "python.languageServer": "Pylance",
+  "python.analysis.autoSearchPaths": true, // 자동으로 Python 경로 탐색
+  "python.analysis.typeCheckingMode": "basic", // 타입 체킹 모드 (basic, strict, off)
+  "python.analysis.completeFunctionParens": true, // 함수 자동 완성 시 괄호 추가
+  "editor.insertSpaces": true,
+  "editor.tabSize": 4,
+  "[python]": {
+    "editor.formatOnSave": true,
+    "editor.formatOnSaveMode": "file",
+    "editor.defaultFormatter": "charliermarsh.ruff",
+    "editor.codeActionsOnSave": {
+      "source.fixAll": "explicit",
+      "source.organizeImports.ruff": "explicit"
+    },
+    "python.linting.ruffArgs": [
+      "--fix"  // ruff의 자동 수정 옵션
+    ],
+  },
+  // Ruff 설정
+  "ruff.enable": true,
+  "ruff.lint.enable": true,
+  "ruff.path": ["rye", "run", "ruff"], // rye run ruff를 사용
+  "ruff.importStrategy": "fromEnvironment" // 환경에서 Ruff를 사용
+}

@@ -1,0 +1,23 @@
+[project]
+name = "fastapi-ca"
+version = "0.1.0"
+description = "Add your description here"
+authors = [{ name = "강병용", email = "byeongyong.kang@vuno.co" }]
+dependencies = [
+    "fastapi>=0.115.6",
+    "uvicorn[standard]>=0.34.0",
+    "py-ulid>=1.0.3",
+    "sqlalchemy>=2.0.37",
+    "alembic>=1.14.0",
+    "mysqlclient>=2.2.6",
+    "python-dotenv>=1.0.1",
+    "pydantic-settings>=2.7.1",
+    "bcrypt>=4.2.1",
+    "dependency-injector>=4.45.0",
+]
+readme = "README.md"
+requires-python = ">= 3.8"
+
+[tool.rye]
+managed = true
+dev-dependencies = ["ruff>=0.8.6", "pylance>=0.21.0"]
