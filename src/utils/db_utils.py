@@ -1,6 +1,7 @@
 from sqlalchemy import inspect
+from sqlalchemy.ext.asyncio import AsyncSession
 
-from database import SessionLocal
+from database import AsyncSessionLocal, SessionLocal, async_engine
 
 
 def row_to_dict(row) -> dict:
@@ -13,3 +14,11 @@ def get_db():
         yield db
     finally:
         db.close()
+
+
+async def get_async_db():
+    async with AsyncSessionLocal() as session:
+        # To Something
+        await session.commit()
+    await AsyncSessionLocal.remove()
+    await async_engine.dispose()
