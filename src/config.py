@@ -7,6 +7,8 @@ class Settings(BaseSettings):
     DATABASE_USERNAME: str
     DATABASE_PASSWORD: str
 
+    JWT_SECRET_KEY: str
+
     model_config = SettingsConfigDict(
         env_file="../.env",
         env_file_encoding="utf-8",
