@@ -14,7 +14,7 @@ settings = get_settings()
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/users/login")
 
 
-SECRET_KEY = {settings.JWT_SECRET_KEY}
+SECRET_KEY = {settings.jwt_secret_key}
 ALGORITHM = "HS256"
 
 
@@ -42,14 +42,14 @@ def get_current_user(token: Annotated[str, Depends(oauth2_scheme)]):
 def create_access_token(payload: dict, role: Role, expires_delta: timedelta = timedelta(hours=6)):
     expire = datetime.now(timezone.utc) + expires_delta
     payload.update({"exp": expire, "role": role})
-    encoded_jwt = jwt.encode(payload, settings.JWT_SECRET_KEY, algorithm=ALGORITHM)
+    encoded_jwt = jwt.encode(payload, settings.jwt_secret_key, algorithm=ALGORITHM)
 
     return encoded_jwt
 
 
 def decode_access_token(token: str):
     try:
-        return jwt.decode(token, settings.JWT_SECRET_KEY, algorithms=[ALGORITHM])
+        return jwt.decode(token, settings.jwt_secret_key, algorithms=[ALGORITHM])
     except JWTError:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Could not validate credentials")
 
